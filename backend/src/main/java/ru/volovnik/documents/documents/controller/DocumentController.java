@@ -1,6 +1,6 @@
-package ru.template.example.documents.controller;
+package ru.volovnik.documents.documents.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,20 +9,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.template.example.documents.controller.dto.DocumentDto;
-import ru.template.example.documents.controller.dto.IdDto;
-import ru.template.example.documents.controller.dto.IdsDto;
-import ru.template.example.documents.controller.dto.Status;
-import ru.template.example.documents.service.DocumentService;
+import ru.volovnik.documents.documents.controller.dto.DocumentDto;
+import ru.volovnik.documents.documents.controller.dto.IdDto;
+import ru.volovnik.documents.documents.controller.dto.IdsDto;
+import ru.volovnik.documents.documents.controller.dto.StatusCode;
+import ru.volovnik.documents.documents.service.DocumentService;
 
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/documents")
 public class DocumentController {
 
-    @Autowired
-    private DocumentService service;
+    private final DocumentService service;
 
     @PostMapping(
             consumes = MediaType.APPLICATION_JSON_VALUE,
@@ -42,7 +42,7 @@ public class DocumentController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     public DocumentDto send(@RequestBody IdDto id) {
         DocumentDto document = service.get(id.getId());
-        document.setStatus(Status.of("IN_PROCESS", "В обработке"));
+        document.setStatus(StatusCode.IN_PROCESS);
         return service.update(document);
     }
 

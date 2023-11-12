@@ -1,4 +1,4 @@
-package ru.template.example.documents.controller.dto;
+package ru.volovnik.documents.documents.controller.dto;
 
 import lombok.Data;
 

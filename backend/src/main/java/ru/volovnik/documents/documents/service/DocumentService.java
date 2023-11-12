@@ -1,6 +1,6 @@
-package ru.template.example.documents.service;
+package ru.volovnik.documents.documents.service;
 
-import ru.template.example.documents.controller.dto.DocumentDto;
+import ru.volovnik.documents.documents.controller.dto.DocumentDto;
 
 import java.util.List;
 import java.util.Set;

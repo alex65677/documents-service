@@ -55,12 +55,12 @@ export const EnhancedTableToolbar = (props) => {
 
             {numSelected > 0 && (
                 <div className="row">
-                    <div hidden={numSelected > 1 || rows.filter(data => data.id === selected[0])[0].status.code !== 'NEW'} className="col-6">
+                    <div hidden={numSelected > 1 || rows.filter(data => data.id === selected[0])[0].status !== 'NEW'} className="col-6">
                         <Tooltip title="Отправить на обработку">
                             <Button onClick={props.send}>Отправить</Button>
                         </Tooltip>
                     </div>
-                    <div hidden={rows.filter(data => selected.includes(data.id) && data.status.code === 'IN_PROCESS' ).length > 0} className="col-6">
+                    <div hidden={rows.filter(data => selected.includes(data.id) && data.status === 'IN_PROCESS' ).length > 0} className="col-6">
                         <Tooltip title="Удалить">
                             <Button onClick={props.delete}>Удалить</Button>
                         </Tooltip>

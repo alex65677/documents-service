@@ -1,11 +1,9 @@
-package ru.template.example;
+package ru.volovnik.documents;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication(scanBasePackages = {
-        "ru.template.example.*"
-})
+@SpringBootApplication
 public class Application {
 
     public static void main(String[] args) {

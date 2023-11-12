@@ -1,4 +1,4 @@
-package ru.template.example.configuration;
+package ru.volovnik.documents.configuration;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

@@ -1,4 +1,4 @@
-package ru.template.example.documents.service;
+package ru.volovnik.documents.documents.service;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -6,8 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
-import ru.template.example.documents.controller.dto.DocumentDto;
-import ru.template.example.documents.store.DocumentStore;
+import ru.volovnik.documents.documents.controller.dto.DocumentDto;
+import ru.volovnik.documents.documents.repository.DocumentRepository;
 
 import java.util.Map;
 import java.util.Set;
@@ -23,10 +23,12 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 public class DocumentServiceImplTest {
     @Autowired
     private DocumentServiceImpl documentService;
+    @Autowired
+    private DocumentRepository documentRepository;
 
     @BeforeEach
     public void before() {
-        DocumentStore.getInstance().getDocumentDtos().clear();
+        documentRepository.deleteAll();
     }
 
     @Test

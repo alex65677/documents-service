@@ -41,6 +41,7 @@ const useStyles = makeStyles((theme) => ({
     root: {
         width: '90%',
         align: 'center',
+        margin: '100px auto'
     },
     paper: {
         width: '90%',
@@ -108,6 +109,19 @@ export default function EnhancedTable(props) {
 
     const isSelected = (name) => selected.indexOf(name) !== -1;
 
+    const getStatusName = (code) => {
+        switch (code) {
+            case 'NEW':
+                return 'Новый';
+            case 'IN_PROCESS':
+                return 'В обработке';
+            case 'ACCEPTED':
+                return 'Принят';
+            case 'DECLINED':
+                return 'Отклонён';
+        }
+    };
+
     const formRow = (row, index) => {
         const isItemSelected = isSelected(row.id);
         const labelId = `enhanced-table-checkbox-${index}`;
@@ -138,7 +152,7 @@ export default function EnhancedTable(props) {
                 <TableCell align="right">{row.date}</TableCell>
                 <TableCell align="right">{row.description}</TableCell>
                 <TableCell align="right">{row.patient}</TableCell>
-                <TableCell align="right">{row.status.name}</TableCell>
+                <TableCell align="right">{getStatusName(row.status)}</TableCell>
             </TableRow>
         );
     }

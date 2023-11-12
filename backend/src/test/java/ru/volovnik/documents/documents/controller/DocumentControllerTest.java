@@ -1,4 +1,4 @@
-package ru.template.example.documents.controller;
+package ru.volovnik.documents.documents.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -15,9 +15,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
-import ru.template.example.configuration.JacksonConfiguration;
-import ru.template.example.documents.controller.dto.DocumentDto;
-import ru.template.example.documents.service.DocumentServiceImpl;
+import ru.volovnik.documents.configuration.JacksonConfiguration;
+import ru.volovnik.documents.documents.controller.dto.DocumentDto;
+import ru.volovnik.documents.documents.service.DocumentServiceImpl;
 
 import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
 import static org.mockito.ArgumentMatchers.any;

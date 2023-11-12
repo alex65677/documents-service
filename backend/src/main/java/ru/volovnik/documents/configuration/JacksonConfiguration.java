@@ -1,4 +1,4 @@
-package ru.template.example.configuration;
+package ru.volovnik.documents.configuration;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;

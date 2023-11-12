@@ -18,20 +18,24 @@ java {
 }
 
 dependencies {
-    implementation('org.springframework.boot:spring-boot-starter-web')
-    implementation('co.elastic.logging:logback-ecs-encoder:1.5.0')
-    implementation('org.apache.commons:commons-lang3:3.12.0')
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'co.elastic.logging:logback-ecs-encoder:1.5.0'
+    implementation 'org.apache.commons:commons-lang3:3.12.0'
+    implementation 'org.hibernate:hibernate-core:5.6.15.Final'
+    implementation 'org.postgresql:postgresql:42.6.0'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.modelmapper:modelmapper:3.2.0'
 
-    compileOnly("org.projectlombok:lombok:1.18.28")
-    annotationProcessor("org.projectlombok:lombok:1.18.28")
-    testImplementation('org.springframework.boot:spring-boot-starter-test')
-    testImplementation('org.testcontainers:postgresql:1.17.6')
+    compileOnly 'org.projectlombok:lombok:1.18.28'
+    annotationProcessor 'org.projectlombok:lombok:1.18.28'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.testcontainers:postgresql:1.17.6'
 
-    compileOnly('org.springframework.boot:spring-boot-configuration-processor')
+    compileOnly 'org.springframework.boot:spring-boot-configuration-processor'
 }
 
 
 test {
-    include('ru/template/example/**')
+    include('ru/volovnik/documents/**')
     useJUnitPlatform()
 }
