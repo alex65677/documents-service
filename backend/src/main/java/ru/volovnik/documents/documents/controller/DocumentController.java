@@ -15,6 +15,7 @@ import ru.volovnik.documents.documents.controller.dto.IdsDto;
 import ru.volovnik.documents.documents.controller.dto.StatusCode;
 import ru.volovnik.documents.documents.service.DocumentService;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -27,7 +28,7 @@ public class DocumentController {
     @PostMapping(
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public DocumentDto save(@RequestBody DocumentDto dto) {
+    public DocumentDto save(@Valid @RequestBody DocumentDto dto) {
         return service.save(dto);
     }
 

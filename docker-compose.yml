@@ -1,11 +1,17 @@
 version: '3.8'
 services:
   api:
-    image: docker-java-jar
+    container_name: docker-java-jar
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
     ports:
       - '8888:8888'
   ui:
-    image: docker-react
+    container_name: docker-react
+    build:
+      context: ./ui
+      dockerfile: Dockerfile
     ports:
       - '9000:3005'
     volumes:

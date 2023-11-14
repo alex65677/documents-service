@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Data
@@ -22,21 +24,29 @@ public class DocumentDto {
     /**
      * Вид документа
      */
+    @NotBlank
+    @Size(max = 255)
     private String type;
 
     /**
      * Организация
      */
+    @NotBlank
+    @Size(max = 255)
     private String organization;
 
     /**
      * Описание
      */
+    @NotBlank
+    @Size(max = 255)
     private String description;
 
     /**
      * Пациент
      */
+    @NotBlank
+    @Size(max = 255)
     private String patient;
 
     /**
