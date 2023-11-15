@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.volovnik.documents.documents.controller.dto.DocumentDto;
 import ru.volovnik.documents.documents.controller.dto.StatusCode;
 import ru.volovnik.documents.documents.entity.Document;
@@ -22,7 +23,9 @@ public class DocumentServiceImpl implements DocumentService {
 
     private final DocumentRepository documentRepository;
     private final ModelMapper mapper;
+    private final KafkaProducer kafkaProducer;
 
+    @Transactional
     public DocumentDto save(DocumentDto documentDto) {
         if (documentDto.getDate() == null) {
             documentDto.setDate(new Date());
@@ -38,7 +41,7 @@ public class DocumentServiceImpl implements DocumentService {
         return documentDto;
     }
 
-
+    @Transactional
     public DocumentDto update(DocumentDto documentDto) {
         Optional<Document> document = documentRepository.findById(documentDto.getId());
         if (document.isPresent()) {
@@ -47,6 +50,17 @@ public class DocumentServiceImpl implements DocumentService {
         return documentDto;
     }
 
+    @Override
+    @Transactional
+    public DocumentDto send(Long id) {
+        DocumentDto documentDto = get(id);
+        documentDto.setStatus(StatusCode.IN_PROCESS);
+        DocumentDto updatedDocument = update(documentDto);
+        kafkaProducer.sendMessage(updatedDocument);
+        return updatedDocument;
+    }
+
+    @Transactional
     public void delete(Long id) {
         Optional<Document> document = documentRepository.findById(id);
         if (document.isPresent()) {
@@ -54,6 +68,7 @@ public class DocumentServiceImpl implements DocumentService {
         }
     }
 
+    @Transactional
     public void deleteAll(Set<Long> ids) {
         for (Long id : ids) {
             delete(id);
@@ -72,7 +87,8 @@ public class DocumentServiceImpl implements DocumentService {
 
     public DocumentDto get(Long id) {
         Optional<Document> optionalDocument = documentRepository.findById(id);
-        Document document = optionalDocument.orElseThrow(() -> new IllegalStateException("Can't find document with id = " + id));
+        Document document = optionalDocument.orElseThrow(
+                () -> new IllegalStateException("Can't find document with id = " + id));
         return mapper.map(document, DocumentDto.class);
     }
 }

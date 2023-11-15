@@ -8,5 +8,4 @@ import java.util.Set;
 public class IdsDto {
 
     private Set<Long> ids;
-
 }

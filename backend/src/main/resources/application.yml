@@ -12,10 +12,12 @@ spring:
     driver-class-name: 'org.postgresql.Driver'
     username: 'postgres'
     password: 'postgres'
-    url: 'jdbc:postgresql://db:5432/documents'
+    url: 'jdbc:postgresql://localhost:5432/documents' #'jdbc:postgresql://db:5432/documents'
   liquibase:
     change-log: classpath:migrations/db.changelog-master.xml
   jpa:
     properties:
       hibernate:
         dialect: 'org.hibernate.dialect.PostgreSQLDialect'
+  kafka:
+    bootstrap-servers: localhost:29093 #kafka:29092
