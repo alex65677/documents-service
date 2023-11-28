@@ -1,0 +1,14 @@
+{
+  "properties": [
+    {
+      "name": "documents.topic.documents-out",
+      "type": "java.lang.String",
+      "description": "Топик документов на обработку."
+    },
+    {
+      "name": "documents.topic.documents-in",
+      "type": "java.lang.String",
+      "description": "Топик результатов обработки документов."
+    }
+  ]
+}

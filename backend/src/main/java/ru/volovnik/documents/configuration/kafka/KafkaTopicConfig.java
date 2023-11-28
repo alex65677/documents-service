@@ -14,6 +14,12 @@ public class KafkaTopicConfig {
     @Value("${spring.kafka.bootstrap-servers}")
     private String bootstrapAddress;
 
+    @Value("${documents.topic.documents-in}")
+    private String docsIn;
+
+    @Value("${documents.topic.documents-out}")
+    private String docsOut;
+
     @Bean
     public KafkaAdmin kafkaAdmin() {
         Map<String, Object> config = new HashMap<>();
@@ -22,7 +28,12 @@ public class KafkaTopicConfig {
     }
 
     @Bean
-    public NewTopic topicDocuments() {
-        return new NewTopic("documents", 1, (short) 1);
+    public NewTopic topicDocumentsOut() {
+        return new NewTopic(docsOut, 1, (short) 1);
+    }
+
+    @Bean
+    public NewTopic topicDocumentsIn() {
+        return new NewTopic(docsIn, 1, (short) 1);
     }
 }

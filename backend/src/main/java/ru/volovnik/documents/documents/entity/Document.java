@@ -2,6 +2,7 @@ package ru.volovnik.documents.documents.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import ru.volovnik.documents.documents.controller.dto.StatusCode;
 
@@ -20,6 +21,7 @@ import java.util.Date;
 @Table(name = "documents")
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Document {
 
     /**
@@ -27,6 +29,7 @@ public class Document {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Include
     private Long id;
 
     /**

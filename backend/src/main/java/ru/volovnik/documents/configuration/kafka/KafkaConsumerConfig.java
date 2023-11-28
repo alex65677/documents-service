@@ -1,7 +1,7 @@
 package ru.volovnik.documents.configuration.kafka;
 
 import org.apache.kafka.clients.consumer.ConsumerConfig;
-import org.apache.kafka.common.serialization.LongDeserializer;
+import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,8 +10,6 @@ import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.listener.ContainerProperties;
-import org.springframework.kafka.support.serializer.JsonDeserializer;
-import ru.volovnik.documents.documents.controller.dto.DocumentDto;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,24 +22,23 @@ public class KafkaConsumerConfig {
     private String bootstrapServers;
 
     @Bean
-    public ConsumerFactory<Long, DocumentDto> consumerFactory() {
+    public ConsumerFactory<String, String> consumerFactory() {
         Map<String, Object> config = new HashMap<>();
         config.put(
                 ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,
                 bootstrapServers);
         config.put(
                 ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG,
-                LongDeserializer.class);
+                StringDeserializer.class);
         config.put(
                 ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,
-                JsonDeserializer.class);
-        return new DefaultKafkaConsumerFactory<>(
-                config, new LongDeserializer(), new JsonDeserializer<>(DocumentDto.class));
+                StringDeserializer.class);
+        return new DefaultKafkaConsumerFactory<>(config);
     }
 
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<Long, DocumentDto> kafkaListenerContainerFactory() {
-        ConcurrentKafkaListenerContainerFactory<Long, DocumentDto> factory = new ConcurrentKafkaListenerContainerFactory<>();
+    public ConcurrentKafkaListenerContainerFactory<String, String> kafkaListenerContainerFactory() {
+        ConcurrentKafkaListenerContainerFactory<String, String> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory());
         ContainerProperties containerProperties = factory.getContainerProperties();
         containerProperties.setSyncCommits(true);

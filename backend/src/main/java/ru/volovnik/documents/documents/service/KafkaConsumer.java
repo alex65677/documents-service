@@ -1,21 +1,21 @@
 package ru.volovnik.documents.documents.service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.kafka.annotation.KafkaListener;
-import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
-import ru.volovnik.documents.documents.controller.dto.DocumentDto;
-import ru.volovnik.documents.documents.controller.dto.StatusCode;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class KafkaConsumer {
 
-    private final DocumentService documentService;
+    private final InboxService inboxService;
 
-    @KafkaListener(topics = "documents", groupId = "group_id", containerFactory = "kafkaListenerContainerFactory")
-    public void consume(@Payload DocumentDto documentDto) {
-        documentDto.setStatus(StatusCode.ACCEPTED);
-        documentService.update(documentDto);
+    @KafkaListener(topics = {"${documents.topic.documents-in}", "${documents.topic.documents-out}"},
+            groupId = "group_id", containerFactory = "kafkaListenerContainerFactory")
+    public void consumeIn(ConsumerRecord<String, String> record) {
+        inboxService.addMessage(record.topic(), record.key(), record.value());
     }
 }

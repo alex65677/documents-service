@@ -61,4 +61,18 @@ public interface DocumentService {
      * @return документ
      */
     DocumentDto get(Long id);
+
+    /**
+     * Обработать отправленный документ
+     *
+     * @param data данные
+     */
+    void processDocument(String data);
+
+    /**
+     * Получить результат обработки
+     *
+     * @param data данные
+     */
+    void processResult(String data);
 }

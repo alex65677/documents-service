@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.volovnik.documents.documents.controller.dto.DocumentDto;
 import ru.volovnik.documents.documents.controller.dto.IdDto;
 import ru.volovnik.documents.documents.controller.dto.IdsDto;
-import ru.volovnik.documents.documents.controller.dto.StatusCode;
 import ru.volovnik.documents.documents.service.DocumentService;
 
 import javax.validation.Valid;

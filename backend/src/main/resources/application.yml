@@ -21,3 +21,8 @@ spring:
         dialect: 'org.hibernate.dialect.PostgreSQLDialect'
   kafka:
     bootstrap-servers: localhost:29093 #kafka:29092
+
+documents:
+  topic:
+    documents-in: "documents-in"
+    documents-out: "documents-out"
