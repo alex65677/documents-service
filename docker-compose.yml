@@ -27,6 +27,7 @@ services:
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=documents
     ports:
       - '5432:5432'
   zookeeper:
@@ -54,7 +55,6 @@ services:
     container_name: kafka-ui
     ports:
       - '8090:8080'
-    restart: always
     environment:
       - KAFKA_CLUSTERS_0_NAME=local
       - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=kafka:29092
