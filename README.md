@@ -1,32 +1,36 @@
 ## Описание
 
-Фул стек приложение - справочник документов
+Full-stack приложение - справочник документов
 
 ## Структура
 
-- `backend` - Бэкенд на java.
-- `ui` - Фронтенд на react + redux.
+- `backend` - Backend на Java, Spring (Boot, Web, Data JPA, AOP), PostgreSQL, Kafka.
+- `ui` - Frontend на React + Redux.
 
 ## Подготовка
 
 Установите:
 
-- [node](https://nodejs.org) - front
-- [openjdk](https://openjdk.java.net) 15 - java бэк
+- [Node.js](https://nodejs.org) - Frontend
+- [JDK 15](https://openjdk.java.net) - Java 15
+- [Docker](https://docker.com)
 
 ## Запуск
+Сборка frontend:
+```
+./gradlew ui:npm_run_build
+```
+Сборка jar:
+```
+./gradlew backend:bootJar
+```
+Запуск:
+```
+docker-compose up -d
+```
 
-### Запуск фронта
-
-```
-./gradlew ui:npm_run_start
-```
-### Запуск бэка
-```
-./gradlew backend:bootrun
-```
-
-### Адрес страницы
+## Адрес страницы
+После запуска приложение доступно в браузере по адресу:
 ```
 http://localhost:9000/#/
 ```
